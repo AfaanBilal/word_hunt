@@ -346,7 +346,7 @@ class _WordHuntState extends State<WordHunt> {
             ),
           ),
           const Padding(
-            padding: EdgeInsets.all(12.0),
+            padding: EdgeInsets.only(left: 12.0, bottom: 12.0),
             child: Text('© Afaan Bilal · afaan.dev', style: TextStyle(fontSize: 14.0, color: Colors.purple)),
           ),
         ],
