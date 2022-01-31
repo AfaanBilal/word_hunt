@@ -324,7 +324,7 @@ class _WordHuntState extends State<WordHunt> {
                               child: Column(
                                 children: <Widget>[
                                   Text(
-                                    'Genius! Well done!',
+                                    'Well done!',
                                     style: Theme.of(context).textTheme.headline5?.copyWith(color: Colors.green),
                                   ),
                                   ElevatedButton(
