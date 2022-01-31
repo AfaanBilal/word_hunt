@@ -306,7 +306,7 @@ class _WordHuntState extends State<WordHunt> {
       }
 
       if (_tryNumber > 5) {
-        showAlertDialog(context, 'Next time', '😔 You lost! \n\nThe word was: $_currentWord', 'New word', reset);
+        showAlertDialog(context, 'Oops', '😔 You lost! \n\nThe word was: $_currentWord', 'New word', reset);
       }
 
       firstTbFocus.requestFocus();
