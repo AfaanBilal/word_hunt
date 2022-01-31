@@ -4,7 +4,7 @@ Word Hunt
 Author: **[Afaan Bilal](https://afaan.dev)**
 
 ## Introduction
-**Word Hunt** is a mobile app built in Flutter. Guess a 5 letter word in 6 attempts.
+**Word Hunt** is a mobile app built in Flutter. Guess a 5 letter word in 6 attempts. Inspired by Wordle.
 
 ## Contributing
 All contributions are welcome. Please create an issue first for any feature request
