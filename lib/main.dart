@@ -201,6 +201,10 @@ class _WordHuntState extends State<WordHunt> {
   Color wordBoxColor(String character, int position, int row) {
     var cWordList = _currentWord.split('');
 
+    if (row > _tryNumber) {
+      return Colors.grey.shade200;
+    }
+
     if (cWordList[position] == character) {
       return Colors.green.shade900;
     } else if (cWordList.contains(character)) {
@@ -242,8 +246,19 @@ class _WordHuntState extends State<WordHunt> {
   }
 
   Widget buildWordBoxRow(String word, int row) {
-    if (row == _tryNumber || word.trim().characters.isEmpty) {
+    if (row >= _tryNumber && _hasWon) {
       return Container();
+    }
+
+    if (row == _tryNumber) {
+      return buildTextBoxRow(_tryNumber);
+    }
+
+    if (word.trim().characters.isEmpty) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [' ', ' ', ' ', ' ', ' '].asMap().entries.map((c) => buildWordBox(c.value, c.key, row)).toList(),
+      );
     }
 
     return Row(
@@ -289,40 +304,45 @@ class _WordHuntState extends State<WordHunt> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const Padding(padding: EdgeInsets.all(10.0)),
-                  Text(
-                    'Guess a five letter word:',
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                  Column(
-                    children: _guessWords.asMap().entries.map((w) => buildWordBoxRow(w.value.join(), w.key)).toList(),
-                  ),
-                  _hasWon
-                      ? Padding(
-                          padding: const EdgeInsets.only(top: 20.0),
-                          child: Column(
-                            children: <Widget>[
-                              Text(
-                                'Genius! Well done!',
-                                style: Theme.of(context).textTheme.headline5?.copyWith(color: Colors.green),
+            child: CustomScrollView(
+              slivers: [
+                SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const Padding(padding: EdgeInsets.all(10.0)),
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: _guessWords.asMap().entries.map((w) => buildWordBoxRow(w.value.join(), w.key)).toList(),
+                        ),
+                      ),
+                      _hasWon
+                          ? Padding(
+                              padding: const EdgeInsets.only(top: 20.0),
+                              child: Column(
+                                children: <Widget>[
+                                  Text(
+                                    'Genius! Well done!',
+                                    style: Theme.of(context).textTheme.headline5?.copyWith(color: Colors.green),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      final box = context.findRenderObject() as RenderBox?;
+                                      Share.share(createShareText(),
+                                          subject: "Share", sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size);
+                                    },
+                                    child: const Text('Share'),
+                                  ),
+                                ],
                               ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  final box = context.findRenderObject() as RenderBox?;
-                                  Share.share(createShareText(), subject: "Share", sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size);
-                                },
-                                child: const Text('Share'),
-                              ),
-                            ],
-                          ),
-                        )
-                      : buildTextBoxRow(_tryNumber),
-                ],
-              ),
+                            )
+                          : Container(),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
           const Padding(
@@ -361,6 +381,7 @@ showAlertDialog(BuildContext context, String title, String message, String okTex
 
   showDialog(
     context: context,
+    barrierDismissible: false,
     builder: (BuildContext context) {
       return alert;
     },
