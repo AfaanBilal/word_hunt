@@ -320,7 +320,7 @@ class _WordHuntState extends State<WordHunt> {
                       ),
                       _hasWon
                           ? Padding(
-                              padding: const EdgeInsets.only(top: 20.0),
+                              padding: const EdgeInsets.only(top: 20.0, bottom: 180.0),
                               child: Column(
                                 children: <Widget>[
                                   Text(
