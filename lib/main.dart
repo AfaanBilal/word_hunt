@@ -252,9 +252,9 @@ class _WordHuntState extends State<WordHunt> {
                 showAlertDialog(
                     context,
                     'Guide',
-                    '⬛ Character is not present.'
-                        '\n\n🟨 Character is present but at a different position.'
-                        '\n\n🟩 Character is present and at the correct position.',
+                    '⬛ Letter is not present.'
+                        '\n\n🟨 Letter is present but at the wrong position.'
+                        '\n\n🟩 Letter is present and at the correct position.',
                     'Got it!',
                     () {});
               },
