@@ -10,6 +10,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:share_plus/share_plus.dart';
 
 void main() => runApp(const MyApp());
 
@@ -176,6 +177,27 @@ class _WordHuntState extends State<WordHunt> {
     );
   }
 
+  String createShareText() {
+    List<String> shareMatrix = ['WordHunt $_tryNumber/6'];
+    for (int i = 0; i < _tryNumber; i++) {
+      List<String> shareLine = [];
+      for (int j = 0; j < 5; j++) {
+        var wbColor = wordBoxColor(_guessWords[i][j], j, i);
+        if (wbColor == Colors.green.shade900) {
+          shareLine.add('🟩');
+        } else if (wbColor == Colors.yellow.shade800) {
+          shareLine.add('🟨');
+        } else {
+          shareLine.add('⬛');
+        }
+      }
+
+      shareMatrix.add(shareLine.join());
+    }
+
+    return shareMatrix.join('\n');
+  }
+
   Color wordBoxColor(String character, int position, int row) {
     var cWordList = _currentWord.split('');
 
@@ -282,10 +304,22 @@ class _WordHuntState extends State<WordHunt> {
                   _hasWon
                       ? Padding(
                           padding: const EdgeInsets.only(top: 20.0),
-                          child: Text(
-                            'Genius! Well done!',
-                            style: Theme.of(context).textTheme.headline5?.copyWith(color: Colors.green),
-                          ))
+                          child: Column(
+                            children: <Widget>[
+                              Text(
+                                'Genius! Well done!',
+                                style: Theme.of(context).textTheme.headline5?.copyWith(color: Colors.green),
+                              ),
+                              ElevatedButton(
+                                onPressed: () {
+                                  final box = context.findRenderObject() as RenderBox?;
+                                  Share.share(createShareText(), subject: "Share", sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size);
+                                },
+                                child: const Text('Share'),
+                              ),
+                            ],
+                          ),
+                        )
                       : buildTextBoxRow(_tryNumber),
                 ],
               ),
