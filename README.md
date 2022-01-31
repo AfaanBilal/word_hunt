@@ -13,5 +13,5 @@ or add the feature and create a pull request. That's it!
 Thanks!
 
 ## License
-**Hamming Code** is released under the MIT License.
+**Word Hunt** is released under the MIT License.
 Check out the full license [here](LICENSE).
