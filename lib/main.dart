@@ -278,7 +278,7 @@ class _WordHuntState extends State<WordHunt> {
             _launchInBrowser('https://afaan.dev');
           },
           child: const Icon(
-            Icons.account_circle_rounded,
+            Icons.auto_awesome_rounded,
           ),
         ),
         actions: [
@@ -295,7 +295,7 @@ class _WordHuntState extends State<WordHunt> {
                     'Got it!',
                     () {});
               },
-              child: const Icon(Icons.help),
+              child: const Icon(Icons.help_outline_sharp),
             ),
           ),
         ],
