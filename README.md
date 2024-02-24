@@ -8,6 +8,8 @@ Author: **[Afaan Bilal](https://afaan.dev)**
 
 ## Screenshots
 
+![Word Hunt](https://afaan.dev/screenshots/word_hunt.png)
+
 |Finding a word            | Found a word              | Guide                     |
 :-------------------------:|:-------------------------:|:-------------------------:|
 ![](https://afaan.dev/screenshots/word_hunt_1.png) | ![](https://afaan.dev/screenshots/word_hunt_2.png) | ![](https://afaan.dev/screenshots/word_hunt_3.png)
